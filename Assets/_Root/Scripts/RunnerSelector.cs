@@ -1,44 +1,40 @@
+using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
 
 public class RunnerSelector : MonoBehaviour
 {
-    public NetworkRunner[] Runners => RunnerController.Instance.Runners;
+    public List<NetworkRunner> Runners;
 
-    private void Start()
+    public void Init(List<NetworkRunner> runners)
     {
-        RunnerController.Instance.StartCompleted += Init;
-    }
-
-    private void Init()
-    {
-        var index = RunnerController.Instance.Runners.Length - 1;
-        ChangeVisibleAndProvideInputToRunner(index);
+        Runners = runners;
+        ChangeVisibleAndProvideInput(Runners.Count - 1);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.BackQuote)) ChangeVisibleAndProvideInputToRunner(0);
-        if (Input.GetKeyDown(KeyCode.Alpha1)) ChangeVisibleAndProvideInputToRunner(1);
-        if (Input.GetKeyDown(KeyCode.Alpha2)) ChangeVisibleAndProvideInputToRunner(2);
+        if (Input.GetKeyDown(KeyCode.BackQuote)) ChangeVisibleAndProvideInput(0);
+        if (Input.GetKeyDown(KeyCode.Alpha1)) ChangeVisibleAndProvideInput(1);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) ChangeVisibleAndProvideInput(2);
 
-        if (Input.GetKeyDown(KeyCode.Keypad1)) ChangeProvideInputToRunner(1);
-        if (Input.GetKeyDown(KeyCode.Keypad2)) ChangeProvideInputToRunner(2);
+        if (Input.GetKeyDown(KeyCode.Keypad1)) ChangeProvideInput(1);
+        if (Input.GetKeyDown(KeyCode.Keypad2)) ChangeProvideInput(2);
     }
 
-    private void ChangeVisibleAndProvideInputToRunner(int index)
+    private void ChangeVisibleAndProvideInput(int index)
     {
-        ChangeVisibleToRunner(index);
-        ChangeProvideInputToRunner(index);
+        ChangeVisible(index);
+        ChangeProvideInput(index);
     }
 
-    private void ChangeVisibleToRunner(int index)
+    private void ChangeVisible(int index)
     {
         foreach (var runner in Runners) runner.IsVisible = false;
         Runners[index].IsVisible = true;
     }
 
-    private void ChangeProvideInputToRunner(int index)
+    private void ChangeProvideInput(int index)
     {
         foreach (var runner in Runners) runner.ProvideInput = false;
         Runners[index].ProvideInput = true;
