@@ -14,12 +14,16 @@ public class RunnerInputter : MonoBehaviour
 
         InputActions = new InputActions();
         InputNetwork = new InputNetwork();
+
+        InputActions.Player.Move.performed += context => InputNetwork.Direction = context.ReadValue<Vector2>();
+        InputActions.Player.Move.canceled += context => InputNetwork.Direction = Vector2.zero;
+
+        InputActions.Player.Rotate.performed += context => InputNetwork.Rotation = context.ReadValue<Vector2>();
+        InputActions.Player.Rotate.canceled += context => InputNetwork.Rotation = Vector2.zero;
     }
 
     private void OnInput(NetworkRunner runner, NetworkInput input)
     {
-        InputNetwork.Direction = InputActions.Player.Move.ReadValue<Vector2>();
-
         input.Set(InputNetwork);
     }
 }
@@ -27,4 +31,5 @@ public class RunnerInputter : MonoBehaviour
 public struct InputNetwork : INetworkInput
 {
     public Vector2 Direction;
+    public Vector2 Rotation;
 }

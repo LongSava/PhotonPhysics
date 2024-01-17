@@ -5,19 +5,21 @@ public class Player : NetworkBehaviour
 {
     public Rigidbody Rigidbody;
     public RunnerInputter RunnerInputter;
-    public Transform Model;
+    public Model Model;
+    public Device Device;
 
     public override async void Spawned()
     {
+        Model = await Runner.InstantiateOrigin<Model>("Model", transform);
+
         if (HasInputAuthority)
         {
             RunnerInputter = Runner.GetComponent<RunnerInputter>();
             RunnerInputter.InputActions.Enable();
 
-            var camera = await Utils.GetAsset<Camera>("Camera");
-            camera = Runner.InstantiateInRunnerScene(camera);
-            camera.transform.SetParent(Model);
-            camera.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+            Device = await Runner.InstantiateOrigin<Device>("Device", transform);
+
+            Model.Init(Device.Head, Device.LeftHand, Device.RightHand);
         }
     }
 
@@ -26,7 +28,7 @@ public class Player : NetworkBehaviour
         if (GetInput(out InputNetwork inputNetwork))
         {
             Rigidbody.MovePosition(transform.position + transform.forward * inputNetwork.Direction.y * Runner.DeltaTime);
-            transform.Rotate(new Vector3(0, inputNetwork.Direction.x, 0) * Runner.DeltaTime * 100);
+            transform.Rotate(new Vector3(0, inputNetwork.Rotation.x, 0) * Runner.DeltaTime * 100);
         }
     }
 }

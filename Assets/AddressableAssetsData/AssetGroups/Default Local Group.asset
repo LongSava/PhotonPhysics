@@ -18,11 +18,15 @@ MonoBehaviour:
   m_GUID: 5dff490a6431bc14dadbd20ccfbaf821
   m_SerializeEntries:
   - m_GUID: 57a10e804f4236345b9fe19b63ea7fda
-    m_Address: Camera
+    m_Address: Device
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 65c0c44931396994a887615db7c878d7
     m_Address: Player
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4ad26d5350eb67343b06d223aeaef0ed
+    m_Address: Model
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

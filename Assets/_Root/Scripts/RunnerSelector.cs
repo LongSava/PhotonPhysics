@@ -5,21 +5,23 @@ using UnityEngine;
 public class RunnerSelector : MonoBehaviour
 {
     public List<NetworkRunner> Runners;
+    public InputActions InputActions;
 
     public void Init(List<NetworkRunner> runners)
     {
         Runners = runners;
+        InputActions = new InputActions();
         ChangeVisibleAndProvideInput(Runners.Count - 1);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.BackQuote)) ChangeVisibleAndProvideInput(0);
-        if (Input.GetKeyDown(KeyCode.Alpha1)) ChangeVisibleAndProvideInput(1);
-        if (Input.GetKeyDown(KeyCode.Alpha2)) ChangeVisibleAndProvideInput(2);
+        if (InputActions.Selector.SelectServerVisibleAndInput.IsPressed()) ChangeVisibleAndProvideInput(0);
+        if (InputActions.Selector.SelectClient0VisibleAndInput.IsPressed()) ChangeVisibleAndProvideInput(1);
+        if (InputActions.Selector.SelectClient1VisibleAndInput.IsPressed()) ChangeVisibleAndProvideInput(2);
 
-        if (Input.GetKeyDown(KeyCode.Keypad1)) ChangeProvideInput(1);
-        if (Input.GetKeyDown(KeyCode.Keypad2)) ChangeProvideInput(2);
+        if (InputActions.Selector.SelectClient0Input.IsPressed()) ChangeProvideInput(1);
+        if (InputActions.Selector.SelectClient1Input1.IsPressed()) ChangeProvideInput(2);
     }
 
     private void ChangeVisibleAndProvideInput(int index)
