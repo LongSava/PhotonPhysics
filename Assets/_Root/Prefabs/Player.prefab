@@ -51,6 +51,9 @@ MonoBehaviour:
   _interpolationDataSource: 0
   Rigidbody: {fileID: 2016291033092589551}
   RunnerInputter: {fileID: 0}
+  Model: {fileID: 0}
+  Device: {fileID: 0}
+  InterpolateTarget: {fileID: 4438327243667682066}
 --- !u!114 &3519008381496393472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4438327243667682066}
   m_Layer: 0
-  m_Name: Body
+  m_Name: InterpolateTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -156,7 +156,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SelectClient1Input1",
+                    "name": "SelectClient1Input",
                     "type": "Button",
                     "id": "3660fcb6-d131-453b-bc62-469282d4847f",
                     "expectedControlType": "Button",
@@ -217,7 +217,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SelectClient1Input1",
+                    "action": "SelectClient1Input",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

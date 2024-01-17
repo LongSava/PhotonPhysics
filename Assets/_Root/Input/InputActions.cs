@@ -178,7 +178,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SelectClient1Input1"",
+                    ""name"": ""SelectClient1Input"",
                     ""type"": ""Button"",
                     ""id"": ""3660fcb6-d131-453b-bc62-469282d4847f"",
                     ""expectedControlType"": ""Button"",
@@ -239,7 +239,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SelectClient1Input1"",
+                    ""action"": ""SelectClient1Input"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -258,7 +258,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Selector_SelectClient0VisibleAndInput = m_Selector.FindAction("SelectClient0VisibleAndInput", throwIfNotFound: true);
         m_Selector_SelectClient1VisibleAndInput = m_Selector.FindAction("SelectClient1VisibleAndInput", throwIfNotFound: true);
         m_Selector_SelectClient0Input = m_Selector.FindAction("SelectClient0Input", throwIfNotFound: true);
-        m_Selector_SelectClient1Input1 = m_Selector.FindAction("SelectClient1Input1", throwIfNotFound: true);
+        m_Selector_SelectClient1Input = m_Selector.FindAction("SelectClient1Input", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -378,7 +378,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Selector_SelectClient0VisibleAndInput;
     private readonly InputAction m_Selector_SelectClient1VisibleAndInput;
     private readonly InputAction m_Selector_SelectClient0Input;
-    private readonly InputAction m_Selector_SelectClient1Input1;
+    private readonly InputAction m_Selector_SelectClient1Input;
     public struct SelectorActions
     {
         private @InputActions m_Wrapper;
@@ -387,7 +387,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @SelectClient0VisibleAndInput => m_Wrapper.m_Selector_SelectClient0VisibleAndInput;
         public InputAction @SelectClient1VisibleAndInput => m_Wrapper.m_Selector_SelectClient1VisibleAndInput;
         public InputAction @SelectClient0Input => m_Wrapper.m_Selector_SelectClient0Input;
-        public InputAction @SelectClient1Input1 => m_Wrapper.m_Selector_SelectClient1Input1;
+        public InputAction @SelectClient1Input => m_Wrapper.m_Selector_SelectClient1Input;
         public InputActionMap Get() { return m_Wrapper.m_Selector; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -409,9 +409,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @SelectClient0Input.started += instance.OnSelectClient0Input;
             @SelectClient0Input.performed += instance.OnSelectClient0Input;
             @SelectClient0Input.canceled += instance.OnSelectClient0Input;
-            @SelectClient1Input1.started += instance.OnSelectClient1Input1;
-            @SelectClient1Input1.performed += instance.OnSelectClient1Input1;
-            @SelectClient1Input1.canceled += instance.OnSelectClient1Input1;
+            @SelectClient1Input.started += instance.OnSelectClient1Input;
+            @SelectClient1Input.performed += instance.OnSelectClient1Input;
+            @SelectClient1Input.canceled += instance.OnSelectClient1Input;
         }
 
         private void UnregisterCallbacks(ISelectorActions instance)
@@ -428,9 +428,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @SelectClient0Input.started -= instance.OnSelectClient0Input;
             @SelectClient0Input.performed -= instance.OnSelectClient0Input;
             @SelectClient0Input.canceled -= instance.OnSelectClient0Input;
-            @SelectClient1Input1.started -= instance.OnSelectClient1Input1;
-            @SelectClient1Input1.performed -= instance.OnSelectClient1Input1;
-            @SelectClient1Input1.canceled -= instance.OnSelectClient1Input1;
+            @SelectClient1Input.started -= instance.OnSelectClient1Input;
+            @SelectClient1Input.performed -= instance.OnSelectClient1Input;
+            @SelectClient1Input.canceled -= instance.OnSelectClient1Input;
         }
 
         public void RemoveCallbacks(ISelectorActions instance)
@@ -459,6 +459,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnSelectClient0VisibleAndInput(InputAction.CallbackContext context);
         void OnSelectClient1VisibleAndInput(InputAction.CallbackContext context);
         void OnSelectClient0Input(InputAction.CallbackContext context);
-        void OnSelectClient1Input1(InputAction.CallbackContext context);
+        void OnSelectClient1Input(InputAction.CallbackContext context);
     }
 }

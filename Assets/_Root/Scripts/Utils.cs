@@ -12,12 +12,11 @@ public static class Utils
         return handle.Result.GetComponent<T>();
     }
 
-    public static async Task<T> InstantiateOrigin<T>(this NetworkRunner runner, string path, Transform parent) where T : MonoBehaviour
+    public static async Task<T> InstantiateOrigin<T>(string path, Transform parent) where T : MonoBehaviour
     {
         var asset = await GetAsset<T>(path);
 
-        var target = runner.InstantiateInRunnerScene(asset);
-        target.transform.SetParent(parent);
+        var target = Object.Instantiate(asset, parent);
         target.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
 
         return target;
