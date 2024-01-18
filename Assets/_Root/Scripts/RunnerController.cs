@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Fusion;
 using Unity.VisualScripting;
@@ -55,6 +54,7 @@ public class RunnerController : Singleton<RunnerController>
         runner.ProvideInput = false;
 
         var events = runner.AddComponent<NetworkEvents>();
+        events.OnInput = new NetworkEvents.InputEvent();
 
         await runner.StartGame(new StartGameArgs()
         {
@@ -66,7 +66,6 @@ public class RunnerController : Singleton<RunnerController>
         });
 
         if (runner.IsServer) runner.AddComponent<RunnerSpawner>().Init(runner, events);
-        if (runner.IsClient) runner.AddComponent<RunnerInputter>().Init(events);
 
         Runners[index] = runner;
     }
