@@ -16,16 +16,13 @@ public class RunnerSelector : MonoBehaviour
         InputActions.Enable();
 
         ChangeVisibleAndProvideInput(Runners.Length - 1);
-    }
 
-    private void Update()
-    {
-        if (InputActions.Selector.SelectServerVisibleAndInput.IsPressed()) ChangeVisibleAndProvideInput(0);
-        if (InputActions.Selector.SelectClient0VisibleAndInput.IsPressed()) ChangeVisibleAndProvideInput(1);
-        if (InputActions.Selector.SelectClient1VisibleAndInput.IsPressed()) ChangeVisibleAndProvideInput(2);
+        InputActions.Selector.SelectServerVisibleAndInput.performed += context => ChangeVisibleAndProvideInput(0);
+        InputActions.Selector.SelectClient0VisibleAndInput.performed += context => ChangeVisibleAndProvideInput(1);
+        InputActions.Selector.SelectClient1VisibleAndInput.performed += context => ChangeVisibleAndProvideInput(2);
 
-        if (InputActions.Selector.SelectClient0Input.IsPressed()) ChangeProvideInput(1);
-        if (InputActions.Selector.SelectClient1Input.IsPressed()) ChangeProvideInput(2);
+        InputActions.Selector.SelectClient0Input.performed += context => ChangeProvideInput(1);
+        InputActions.Selector.SelectClient1Input.performed += context => ChangeProvideInput(2);
     }
 
     private void ChangeVisibleAndProvideInput(int index)
