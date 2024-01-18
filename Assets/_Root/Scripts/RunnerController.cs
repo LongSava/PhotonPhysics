@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Fusion;
 using Unity.VisualScripting;
@@ -35,7 +36,15 @@ public class RunnerController : Singleton<RunnerController>
         }
 
 #if UNITY_EDITOR
-        gameObject.AddComponent<RunnerSelector>().Init(Runners);
+        var runnerSelector = gameObject.AddComponent<RunnerSelector>();
+        runnerSelector.Init(Runners);
+        foreach (var runner in Runners)
+        {
+            if (runner.IsServer)
+            {
+                runner.GetComponent<NetworkEvents>().PlayerJoined.AddListener((runner, playerRef) => runnerSelector.ChangeVisibleAndProvideInput(Runners.Length - 1));
+            }
+        }
 #endif
     }
 

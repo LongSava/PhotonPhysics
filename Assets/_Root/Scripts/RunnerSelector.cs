@@ -14,8 +14,6 @@ public class RunnerSelector : MonoBehaviour
         InputActions = new InputActions();
         InputActions.Enable();
 
-        ChangeVisibleAndProvideInput(Runners.Length - 1);
-
         InputActions.Selector.SelectServerVisibleAndInput.performed += context => ChangeVisibleAndProvideInput(0);
         InputActions.Selector.SelectClient0VisibleAndInput.performed += context => ChangeVisibleAndProvideInput(1);
         InputActions.Selector.SelectClient1VisibleAndInput.performed += context => ChangeVisibleAndProvideInput(2);
@@ -24,13 +22,13 @@ public class RunnerSelector : MonoBehaviour
         InputActions.Selector.SelectClient1Input.performed += context => ChangeProvideInput(2);
     }
 
-    private void ChangeVisibleAndProvideInput(int index)
+    public void ChangeVisibleAndProvideInput(int index)
     {
         ChangeVisible(index);
         ChangeProvideInput(index);
     }
 
-    private void ChangeVisible(int index)
+    public void ChangeVisible(int index)
     {
         for (int i = 0; i < Runners.Length; i++)
         {
@@ -38,7 +36,7 @@ public class RunnerSelector : MonoBehaviour
         }
     }
 
-    private void Visible(NetworkRunner runner, bool enabled)
+    public void Visible(NetworkRunner runner, bool enabled)
     {
         runner.IsVisible = enabled;
 
