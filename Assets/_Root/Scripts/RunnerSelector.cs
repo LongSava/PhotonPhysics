@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Inputs;
