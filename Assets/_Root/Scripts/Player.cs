@@ -6,26 +6,28 @@ public class Player : NetworkBehaviour
     public Rigidbody Rigidbody;
     public RunnerInputter RunnerInputter;
     public Model Model;
-    public IK IK;
+    public Device Device;
+    public Pose Pose;
     public Transform InterpolateTarget;
 
     public override async void Spawned()
     {
-        Model = await Utils.InstantiateOrigin<Model>("Model", InterpolateTarget);
-        IK = await Utils.InstantiateOrigin<IK>("IK", InterpolateTarget);
+        Model = await Runner.InstantiateOrigin<Model>("Model", InterpolateTarget);
 
         if (HasInputAuthority)
         {
-            await IK.InitDevice();
+            Device = await Runner.InstantiateOrigin<Device>("Device", InterpolateTarget);
+            Model.Init(Device.Head, Device.LeftHand, Device.RightHand);
+
             RunnerInputter = Runner.GetComponent<RunnerInputter>();
             RunnerInputter.InputActions.Enable();
         }
         else
         {
-            await IK.InitPose();
+            Pose = await Runner.InstantiateOrigin<Pose>("Pose", InterpolateTarget);
+            Model.Init(Pose.Head, Pose.LeftHand, Pose.RightHand);
         }
 
-        Model.Init(IK.Head, IK.LeftHand, IK.RightHand);
     }
 
     public override void FixedUpdateNetwork()

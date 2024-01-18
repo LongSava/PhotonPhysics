@@ -29,10 +29,6 @@ MonoBehaviour:
     m_Address: Model
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 05cc7c6a4f834e540af5f1798af8293d
-    m_Address: IK
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 6a3d8e4db8c05ba4b9b648edc4125d5b
     m_Address: Pose
     m_ReadOnly: 0

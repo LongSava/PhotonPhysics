@@ -1,27 +1,31 @@
 using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Inputs;
 
 public class RunnerSelector : MonoBehaviour
 {
-    public List<NetworkRunner> Runners;
+    public NetworkRunner[] Runners;
     public InputActions InputActions;
 
-    public void Init(List<NetworkRunner> runners)
+    public void Init(NetworkRunner[] runners)
     {
         Runners = runners;
 
         InputActions = new InputActions();
         InputActions.Enable();
 
-        ChangeVisibleAndProvideInput(Runners.Count - 1);
+        ChangeVisibleAndProvideInput(Runners.Length - 1);
+    }
 
-        InputActions.Selector.SelectServerVisibleAndInput.performed += context => ChangeVisibleAndProvideInput(0);
-        InputActions.Selector.SelectClient0VisibleAndInput.performed += context => ChangeVisibleAndProvideInput(1);
-        InputActions.Selector.SelectClient1VisibleAndInput.performed += context => ChangeVisibleAndProvideInput(2);
+    private void Update()
+    {
+        if (InputActions.Selector.SelectServerVisibleAndInput.IsPressed()) ChangeVisibleAndProvideInput(0);
+        if (InputActions.Selector.SelectClient0VisibleAndInput.IsPressed()) ChangeVisibleAndProvideInput(1);
+        if (InputActions.Selector.SelectClient1VisibleAndInput.IsPressed()) ChangeVisibleAndProvideInput(2);
 
-        InputActions.Selector.SelectClient0Input.performed += context => ChangeProvideInput(1);
-        InputActions.Selector.SelectClient1Input.performed += context => ChangeProvideInput(2);
+        if (InputActions.Selector.SelectClient0Input.IsPressed()) ChangeProvideInput(1);
+        if (InputActions.Selector.SelectClient1Input.IsPressed()) ChangeProvideInput(2);
     }
 
     private void ChangeVisibleAndProvideInput(int index)
@@ -32,13 +36,37 @@ public class RunnerSelector : MonoBehaviour
 
     private void ChangeVisible(int index)
     {
-        foreach (var runner in Runners) runner.IsVisible = false;
-        Runners[index].IsVisible = true;
+        for (int i = 0; i < Runners.Length; i++)
+        {
+            Visible(Runners[i], i == index);
+        }
+    }
+
+    private void Visible(NetworkRunner runner, bool enabled)
+    {
+        runner.IsVisible = enabled;
+
+        foreach (var gameObject in runner.SimulationUnityScene.GetRootGameObjects())
+        {
+            gameObject.EnableComponentsInChildren<Camera>(enabled);
+        }
     }
 
     private void ChangeProvideInput(int index)
     {
-        foreach (var runner in Runners) runner.ProvideInput = false;
-        Runners[index].ProvideInput = true;
+        for (int i = 0; i < Runners.Length; i++)
+        {
+            ProvideInput(Runners[i], i == index);
+        }
+    }
+
+    private void ProvideInput(NetworkRunner runner, bool enabled)
+    {
+        runner.ProvideInput = enabled;
+
+        foreach (var gameObject in runner.SimulationUnityScene.GetRootGameObjects())
+        {
+            gameObject.EnableComponentsInChildren<InputActionManager>(enabled);
+        }
     }
 }

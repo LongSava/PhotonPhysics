@@ -8,26 +8,30 @@ using UnityEngine.SceneManagement;
 public class RunnerController : Singleton<RunnerController>
 {
     public RunnerMode Mode;
-    public List<NetworkRunner> Runners;
+    public NetworkRunner[] Runners;
 
     private async void Start()
     {
         switch (Mode)
         {
             case RunnerMode.Client:
-                await AddRunner(GameMode.Client);
+                Runners = new NetworkRunner[1];
+                await AddRunner(GameMode.Client, 0);
                 break;
             case RunnerMode.Server:
-                await AddRunner(GameMode.Server);
+                Runners = new NetworkRunner[1];
+                await AddRunner(GameMode.Server, 0);
                 break;
             case RunnerMode.ServerAndOnePlayer:
-                await AddRunner(GameMode.Server);
-                await AddRunner(GameMode.Client);
+                Runners = new NetworkRunner[2];
+                await AddRunner(GameMode.Server, 0);
+                await AddRunner(GameMode.Client, 1);
                 break;
             case RunnerMode.ServerAndTwoPlayer:
-                await AddRunner(GameMode.Server);
-                await AddRunner(GameMode.Client);
-                await AddRunner(GameMode.Client);
+                Runners = new NetworkRunner[3];
+                await AddRunner(GameMode.Server, 0);
+                await AddRunner(GameMode.Client, 1);
+                await AddRunner(GameMode.Client, 2);
                 break;
         }
 
@@ -36,9 +40,12 @@ public class RunnerController : Singleton<RunnerController>
 #endif
     }
 
-    private async Task AddRunner(GameMode gameMode)
+    private async Task AddRunner(GameMode gameMode, int index)
     {
         var runner = new GameObject("Runner" + gameMode).AddComponent<NetworkRunner>();
+        runner.IsVisible = false;
+        runner.ProvideInput = false;
+
         var events = runner.AddComponent<NetworkEvents>();
 
         await runner.StartGame(new StartGameArgs()
@@ -53,7 +60,7 @@ public class RunnerController : Singleton<RunnerController>
         if (runner.IsServer) runner.AddComponent<RunnerSpawner>().Init(runner, events);
         if (runner.IsClient) runner.AddComponent<RunnerInputter>().Init(events);
 
-        Runners.Add(runner);
+        Runners[index] = runner;
     }
 }
 
