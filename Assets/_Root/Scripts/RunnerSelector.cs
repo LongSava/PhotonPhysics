@@ -1,5 +1,8 @@
+using System.Collections;
 using Fusion;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
+using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Inputs;
 
 public class RunnerSelector : MonoBehaviour
@@ -20,6 +23,33 @@ public class RunnerSelector : MonoBehaviour
 
         InputActions.Selector.SelectClient0Input.performed += context => ChangeProvideInput(1);
         InputActions.Selector.SelectClient1Input.performed += context => ChangeProvideInput(2);
+
+        StartCoroutine(CheckDevice());
+    }
+
+    private IEnumerator CheckDevice()
+    {
+        while (true)
+        {
+            int count = 0;
+            foreach (var runner in Runners)
+            {
+                foreach (var gameObject in runner.SimulationUnityScene.GetRootGameObjects())
+                {
+                    if (gameObject.GetComponentInChildren<Device>() != null)
+                    {
+                        count++;
+                        break;
+                    }
+                }
+            }
+            if (count == Runners.Length - 1)
+            {
+                ChangeVisibleAndProvideInput(Runners.Length - 1);
+                break;
+            }
+            yield return null;
+        }
     }
 
     public void ChangeVisibleAndProvideInput(int index)
@@ -30,10 +60,8 @@ public class RunnerSelector : MonoBehaviour
 
     public void ChangeVisible(int index)
     {
-        for (int i = 0; i < Runners.Length; i++)
-        {
-            Visible(Runners[i], i == index);
-        }
+        foreach (var runner in Runners) Visible(runner, false);
+        Visible(Runners[index], true);
     }
 
     public void Visible(NetworkRunner runner, bool enabled)
@@ -48,10 +76,8 @@ public class RunnerSelector : MonoBehaviour
 
     private void ChangeProvideInput(int index)
     {
-        for (int i = 0; i < Runners.Length; i++)
-        {
-            ProvideInput(Runners[i], i == index);
-        }
+        foreach (var runner in Runners) ProvideInput(runner, false);
+        ProvideInput(Runners[index], true);
     }
 
     private void ProvideInput(NetworkRunner runner, bool enabled)
@@ -60,7 +86,8 @@ public class RunnerSelector : MonoBehaviour
 
         foreach (var gameObject in runner.SimulationUnityScene.GetRootGameObjects())
         {
-            gameObject.EnableComponentsInChildren<InputActionManager>(enabled);
+            gameObject.EnableComponentsInChildren<TrackedPoseDriver>(enabled);
+            gameObject.EnableComponentsInChildren<XRBaseController>(enabled);
         }
     }
 }

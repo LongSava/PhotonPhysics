@@ -1,4 +1,3 @@
-using System;
 using Fusion;
 using UnityEngine;
 
@@ -18,6 +17,11 @@ public class Player : NetworkBehaviour
 
         if (HasInputAuthority)
         {
+            InputActions = new InputActions();
+            InputActions.Enable();
+
+            Runner.GetComponent<NetworkEvents>().OnInput.AddListener(OnInput);
+
             Device = await Runner.InstantiateOrigin<Device>("Device", InterpolateTarget);
             Model.Init(Device.Head, Device.LeftHand, Device.RightHand);
         }
@@ -25,13 +29,6 @@ public class Player : NetworkBehaviour
         {
             Pose = await Runner.InstantiateOrigin<Pose>("Pose", InterpolateTarget);
             Model.Init(Pose.Head, Pose.LeftHand, Pose.RightHand);
-        }
-
-        if (HasInputAuthority)
-        {
-            Runner.GetComponent<NetworkEvents>().OnInput.AddListener(OnInput);
-            InputActions = new InputActions();
-            InputActions.Enable();
         }
     }
 
