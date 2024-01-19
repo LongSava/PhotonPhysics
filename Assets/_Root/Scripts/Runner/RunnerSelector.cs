@@ -3,7 +3,6 @@ using Fusion;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.XR.Interaction.Toolkit.Inputs;
 
 public class RunnerSelector : MonoBehaviour
 {
