@@ -58,12 +58,13 @@ public class Player : NetworkBehaviour
         {
             Rigidbody.MovePosition(transform.position + transform.forward * inputData.Direction.y * Runner.DeltaTime);
             transform.Rotate(new Vector3(0, inputData.Rotation.x, 0) * Runner.DeltaTime * 100);
+
+            if (HasStateAuthority)
+            {
+                InputData = inputData;
+            }
         }
 
-        if (HasStateAuthority)
-        {
-            InputData = inputData;
-        }
 
         if (!HasInputAuthority && Pose != null)
         {
