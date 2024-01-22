@@ -4,6 +4,8 @@ using UnityEngine;
 public class Model : MonoBehaviour
 {
     public VRIK VRIK;
+    public Hand LeftHand;
+    public Hand RightHand;
 
     public void Init(Transform head, Transform leftHand, Transform rightHand)
     {
@@ -15,5 +17,15 @@ public class Model : MonoBehaviour
     public void Calibrate(Transform head, Transform leftHand, Transform rightHand)
     {
         VRIKCalibrator.Calibrate(VRIK, head, leftHand, rightHand, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero);
+    }
+
+    public void GripLeft(float value)
+    {
+        LeftHand.SetBend(value);
+    }
+
+    public void GripRight(float value)
+    {
+        RightHand.SetBend(value);
     }
 }

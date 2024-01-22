@@ -43,7 +43,9 @@ public class Player : NetworkBehaviour
             PositionLeftHand = Device.LeftHand.position,
             RotationLeftHand = Device.LeftHand.rotation,
             PositionRightHand = Device.RightHand.position,
-            RotationRightHand = Device.RightHand.rotation
+            RotationRightHand = Device.RightHand.rotation,
+            GripLeft = InputActions.Player.GripLeft.ReadValue<float>(),
+            GripRight = InputActions.Player.GripRight.ReadValue<float>()
         };
 
         input.Set(inputData);
@@ -51,17 +53,16 @@ public class Player : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
-        if (GetInput(out InputDataNetwork inputData))
+        if (GetInput(out InputDataNetwork inputData) && HasStateAuthority)
         {
-            Rigidbody.MovePosition(transform.position + transform.forward * inputData.Direction.y * Runner.DeltaTime);
-            transform.Rotate(new Vector3(0, inputData.Rotation.x, 0) * Runner.DeltaTime * 100);
-
-            if (HasStateAuthority)
-            {
-                InputData = inputData;
-            }
+            InputData = inputData;
         }
 
+        if (HasInputAuthority || HasStateAuthority)
+        {
+            Rigidbody.MovePosition(transform.position + transform.forward * InputData.Direction.y * Runner.DeltaTime);
+            transform.Rotate(new Vector3(0, InputData.Rotation.x, 0) * Runner.DeltaTime * 100);
+        }
 
         if (!HasInputAuthority && Pose != null)
         {
@@ -71,6 +72,12 @@ public class Player : NetworkBehaviour
             Pose.LeftHand.rotation = InputData.RotationLeftHand;
             Pose.RightHand.position = InputData.PositionRightHand;
             Pose.RightHand.rotation = InputData.RotationRightHand;
+        }
+
+        if (Model != null)
+        {
+            Model.GripLeft(InputData.GripLeft);
+            Model.GripRight(inputData.GripRight);
         }
     }
 }
@@ -85,4 +92,6 @@ public struct InputDataNetwork : INetworkInput
     public Quaternion RotationLeftHand;
     public Vector3 PositionRightHand;
     public Quaternion RotationRightHand;
+    public float GripLeft;
+    public float GripRight;
 }
