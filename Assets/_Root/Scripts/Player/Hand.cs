@@ -1,30 +1,15 @@
 using UnityEngine;
 
-public class Hand : MonoBehaviour
+namespace Sava
 {
-    public Finger[] Fingers;
-    [Range(0, 1)] public float Bend;
-
-    public void SetBend(float bend)
+    public class Hand : MonoBehaviour
     {
-        foreach (var finger in Fingers) finger.Bend(bend);
-    }
+        public Finger[] Fingers;
+        [Range(0, 1)] public float Bend;
 
-    [ContextMenu("Reset Bend")]
-    public void ResetBend()
-    {
-        SetBend(Bend);
-    }
-
-    [ContextMenu("Save Pose Open")]
-    public void SavePoseOpen()
-    {
-        foreach (var finger in Fingers) finger.SavePoseOpen();
-    }
-
-    [ContextMenu("Save Pose Close")]
-    public void SavePoseClose()
-    {
-        foreach (var finger in Fingers) finger.SavePoseClose();
+        public void SetBend(float bend)
+        {
+            foreach (var finger in Fingers) finger.Bend(bend);
+        }
     }
 }

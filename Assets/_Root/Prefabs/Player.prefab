@@ -50,9 +50,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
   Rigidbody: {fileID: 2016291033092589551}
-  RunnerInputter: {fileID: 0}
   Model: {fileID: 0}
-  IK: {fileID: 0}
+  Device: {fileID: 0}
+  Pose: {fileID: 0}
   InterpolateTarget: {fileID: 4438327243667682066}
 --- !u!114 &3519008381496393472
 MonoBehaviour:
@@ -94,7 +94,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!114 &3203465264422660805
 MonoBehaviour:
   m_ObjectHideFlags: 0
