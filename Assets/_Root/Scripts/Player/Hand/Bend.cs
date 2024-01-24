@@ -8,6 +8,11 @@ public class Bend : MonoBehaviour
     public float Target;
     public float Current;
 
+    public void Reset()
+    {
+        Speed = 50;
+    }
+
     private void Update()
     {
         if (Current < Target)

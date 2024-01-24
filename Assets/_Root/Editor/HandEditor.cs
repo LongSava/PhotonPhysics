@@ -17,11 +17,11 @@ public class HandEditor : Editor
 
         if (Application.isPlaying)
         {
-            foreach (var finger in Hand.Fingers) finger?.SetBend(Hand.BendValue);
+            foreach (var finger in Hand.Fingers) finger?.Bend?.Set(Hand.BendValue);
         }
         else
         {
-            foreach (var finger in Hand.Fingers) finger?.Pose?.SetPose(Hand.BendValue);
+            foreach (var finger in Hand.Fingers) finger?.Pose?.Set(Hand.BendValue);
         }
 
         GUILayout.Space(20);

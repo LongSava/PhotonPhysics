@@ -6,7 +6,8 @@ public class Tip : MonoBehaviour
 
     public bool IsCollision()
     {
-        Physics.OverlapSphereNonAlloc(transform.position, 1, colliders, LayerMask.NameToLayer("Grabble"), QueryTriggerInteraction.Ignore);
+        colliders[0] = null;
+        Physics.OverlapSphereNonAlloc(transform.position, 0.008f, colliders, 1 << LayerMask.NameToLayer("Grabble"), QueryTriggerInteraction.Ignore);
         return colliders[0] != null;
     }
 }
