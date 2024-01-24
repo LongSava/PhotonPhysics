@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Finger : MonoBehaviour
+public class Pose : MonoBehaviour
 {
     public Transform[] Joints;
     [SerializeField][HideInInspector] public Vector3[] PositionOpen;
@@ -8,12 +8,12 @@ public class Finger : MonoBehaviour
     [SerializeField][HideInInspector] public Vector3[] PositionClose;
     [SerializeField][HideInInspector] public Quaternion[] RotationClose;
 
-    public void Bend(float bend)
+    public void SetPose(float value)
     {
         for (int i = 0; i < Joints.Length; i++)
         {
-            Joints[i].localPosition = Vector3.Lerp(PositionOpen[i], PositionClose[i], bend);
-            Joints[i].localRotation = Quaternion.Lerp(RotationOpen[i], RotationClose[i], bend);
+            Joints[i].localPosition = Vector3.Lerp(PositionOpen[i], PositionClose[i], value);
+            Joints[i].localRotation = Quaternion.Lerp(RotationOpen[i], RotationClose[i], value);
         }
     }
 

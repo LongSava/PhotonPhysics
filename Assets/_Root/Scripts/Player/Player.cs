@@ -5,8 +5,8 @@ public class Player : NetworkBehaviour
 {
     public Rigidbody Rigidbody;
     public Model Model;
-    public Device Device;
-    public Pose Pose;
+    public LocalDevice LocalDevice;
+    public RemoteDevice RemoteDevice;
     public Transform InterpolateTarget;
     public InputActions InputActions;
     [Networked] InputDataNetwork InputData { get; set; }
@@ -22,13 +22,13 @@ public class Player : NetworkBehaviour
 
             Runner.GetComponent<NetworkEvents>().OnInput.AddListener(OnInput);
 
-            Device = await Runner.InstantiateOrigin<Device>("Device", InterpolateTarget);
-            Model.Init(Device.Head, Device.LeftHand, Device.RightHand);
+            LocalDevice = await Runner.InstantiateOrigin<LocalDevice>("LocalDevice", InterpolateTarget);
+            Model.Init(LocalDevice.Head, LocalDevice.LeftHand, LocalDevice.RightHand);
         }
         else
         {
-            Pose = await Runner.InstantiateOrigin<Pose>("Pose", InterpolateTarget);
-            Model.Init(Pose.Head, Pose.LeftHand, Pose.RightHand);
+            RemoteDevice = await Runner.InstantiateOrigin<RemoteDevice>("RemoteDevice", InterpolateTarget);
+            Model.Init(RemoteDevice.Head, RemoteDevice.LeftHand, RemoteDevice.RightHand);
         }
     }
 
@@ -38,12 +38,12 @@ public class Player : NetworkBehaviour
         {
             Direction = InputActions.Player.Move.ReadValue<Vector2>(),
             Rotation = InputActions.Player.Rotate.ReadValue<Vector2>(),
-            PositionHead = Device.Head.position,
-            RotationHead = Device.Head.rotation,
-            PositionLeftHand = Device.LeftHand.position,
-            RotationLeftHand = Device.LeftHand.rotation,
-            PositionRightHand = Device.RightHand.position,
-            RotationRightHand = Device.RightHand.rotation,
+            PositionHead = LocalDevice.Head.position,
+            RotationHead = LocalDevice.Head.rotation,
+            PositionLeftHand = LocalDevice.LeftHand.position,
+            RotationLeftHand = LocalDevice.LeftHand.rotation,
+            PositionRightHand = LocalDevice.RightHand.position,
+            RotationRightHand = LocalDevice.RightHand.rotation,
             GripLeft = InputActions.Player.GripLeft.ReadValue<float>(),
             GripRight = InputActions.Player.GripRight.ReadValue<float>()
         };
@@ -64,14 +64,14 @@ public class Player : NetworkBehaviour
             transform.Rotate(new Vector3(0, InputData.Rotation.x, 0) * Runner.DeltaTime * 100);
         }
 
-        if (!HasInputAuthority && Pose != null)
+        if (!HasInputAuthority && RemoteDevice != null)
         {
-            Pose.Head.position = InputData.PositionHead;
-            Pose.Head.rotation = InputData.RotationHead;
-            Pose.LeftHand.position = InputData.PositionLeftHand;
-            Pose.LeftHand.rotation = InputData.RotationLeftHand;
-            Pose.RightHand.position = InputData.PositionRightHand;
-            Pose.RightHand.rotation = InputData.RotationRightHand;
+            RemoteDevice.Head.position = InputData.PositionHead;
+            RemoteDevice.Head.rotation = InputData.RotationHead;
+            RemoteDevice.LeftHand.position = InputData.PositionLeftHand;
+            RemoteDevice.LeftHand.rotation = InputData.RotationLeftHand;
+            RemoteDevice.RightHand.position = InputData.PositionRightHand;
+            RemoteDevice.RightHand.rotation = InputData.RotationRightHand;
         }
 
         if (Model != null)

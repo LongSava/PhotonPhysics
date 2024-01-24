@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 4877105385965752459}
   - component: {fileID: 5053095794381198249}
   m_Layer: 0
-  m_Name: Pose
+  m_Name: RemoteDevice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

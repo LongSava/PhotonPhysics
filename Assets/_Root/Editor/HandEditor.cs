@@ -15,14 +15,21 @@ public class HandEditor : Editor
     {
         base.OnInspectorGUI();
 
-        Hand.SetBend(Hand.Bend);
+        if (Application.isPlaying)
+        {
+            foreach (var finger in Hand.Fingers) finger?.SetBend(Hand.BendValue);
+        }
+        else
+        {
+            foreach (var finger in Hand.Fingers) finger?.Pose?.SetPose(Hand.BendValue);
+        }
 
         GUILayout.Space(20);
         if (GUILayout.Button("Save Pose Open", GUILayout.Height(50)))
         {
             if (EditorUtility.DisplayDialog("Save Pose Open", "Are you sure?", "OK", "Cancel"))
             {
-                foreach (var finger in Hand.Fingers) finger.SavePoseOpen();
+                foreach (var finger in Hand.Fingers) finger?.Pose.SavePoseOpen();
             }
         }
 
@@ -31,7 +38,7 @@ public class HandEditor : Editor
         {
             if (EditorUtility.DisplayDialog("Save Pose Close", "Are you sure?", "OK", "Cancel"))
             {
-                foreach (var finger in Hand.Fingers) finger.SavePoseClose();
+                foreach (var finger in Hand.Fingers) finger?.Pose.SavePoseClose();
             }
         }
     }

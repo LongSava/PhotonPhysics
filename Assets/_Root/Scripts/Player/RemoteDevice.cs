@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Pose : MonoBehaviour
+public class RemoteDevice : MonoBehaviour
 {
     public Transform Head;
     public Transform LeftHand;

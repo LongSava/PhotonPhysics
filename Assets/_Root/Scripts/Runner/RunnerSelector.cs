@@ -35,7 +35,7 @@ public class RunnerSelector : MonoBehaviour
             {
                 foreach (var gameObject in runner.SimulationUnityScene.GetRootGameObjects())
                 {
-                    if (gameObject.GetComponentInChildren<Device>() != null)
+                    if (gameObject.GetComponentInChildren<LocalDevice>() != null)
                     {
                         count++;
                         break;
