@@ -4,8 +4,8 @@ using UnityEngine;
 public class Model : MonoBehaviour
 {
     public VRIK VRIK;
-    public Sava.Hand LeftHand;
-    public Sava.Hand RightHand;
+    public Hand LeftHand;
+    public Hand RightHand;
 
     public void Init(Transform head, Transform leftHand, Transform rightHand)
     {

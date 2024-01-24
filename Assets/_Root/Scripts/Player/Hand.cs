@@ -1,15 +1,12 @@
 using UnityEngine;
 
-namespace Sava
+public class Hand : MonoBehaviour
 {
-    public class Hand : MonoBehaviour
-    {
-        public Finger[] Fingers;
-        [Range(0, 1)] public float Bend;
+    public Finger[] Fingers;
+    [Range(0, 1)] public float Bend;
 
-        public void SetBend(float bend)
-        {
-            foreach (var finger in Fingers) finger.Bend(bend);
-        }
+    public void SetBend(float bend)
+    {
+        foreach (var finger in Fingers) finger.Bend(bend);
     }
 }

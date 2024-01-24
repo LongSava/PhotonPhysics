@@ -51,8 +51,8 @@ public class RunnerController : Singleton<RunnerController>
         await runner.StartGame(new StartGameArgs()
         {
             GameMode = gameMode,
-            CustomLobbyName = "Photon",
-            SessionName = "Photon",
+            CustomLobbyName = "PhotonPhysics",
+            SessionName = "PhotonPhysics",
             Scene = SceneManager.GetActiveScene().buildIndex,
             SceneManager = runner.gameObject.AddComponent<NetworkSceneManagerDefault>()
         });
