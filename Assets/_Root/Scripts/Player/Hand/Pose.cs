@@ -3,7 +3,6 @@ using UnityEngine;
 public class Pose : MonoBehaviour
 {
     public Transform[] Joints;
-    public Collider[] JointColliders;
     [SerializeField][HideInInspector] public Vector3[] PositionOpen;
     [SerializeField][HideInInspector] public Quaternion[] RotationOpen;
     [SerializeField][HideInInspector] public Vector3[] PositionClose;
@@ -24,11 +23,6 @@ public class Pose : MonoBehaviour
         Joints[0] = transform;
         Joints[1] = transform.GetChild(0);
         Joints[2] = transform.GetChild(0).GetChild(0);
-
-        JointColliders = new Collider[3];
-        JointColliders[0] = Joints[0].GetComponent<Collider>();
-        JointColliders[1] = Joints[1].GetComponent<Collider>();
-        JointColliders[2] = Joints[2].GetComponent<Collider>();
     }
 
     public void SavePoseOpen()
@@ -54,10 +48,5 @@ public class Pose : MonoBehaviour
             position[i] = Joints[i].localPosition;
             rotation[i] = Joints[i].localRotation;
         }
-    }
-
-    public void EnableTrigger(bool enabled)
-    {
-        foreach (var collider in JointColliders) collider.isTrigger = enabled;
     }
 }

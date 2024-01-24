@@ -25,12 +25,9 @@ public class Finger : MonoBehaviour
             if (LastBend == -1)
             {
                 Pose.Set(Bend.Current);
-                Pose.EnableTrigger(false);
             }
             else if (Bend.Current < LastBend)
             {
-                Pose.Set(Bend.Current);
-                Pose.EnableTrigger(false);
                 LastBend = -1;
             }
         }
@@ -46,7 +43,6 @@ public class Finger : MonoBehaviour
                 else
                 {
                     Pose.Set(Bend.Current);
-                    Pose.EnableTrigger(true);
                 }
             }
         }

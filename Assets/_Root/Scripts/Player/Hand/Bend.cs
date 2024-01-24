@@ -10,7 +10,7 @@ public class Bend : MonoBehaviour
 
     public void Reset()
     {
-        Speed = 50;
+        Speed = 10;
     }
 
     private void Update()
