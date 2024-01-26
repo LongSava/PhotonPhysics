@@ -5,6 +5,8 @@ using UnityEngine;
 public class HandEditor : Editor
 {
     public Hand Hand;
+    public float Radius;
+    public float BendValue;
 
     private void OnEnable()
     {
@@ -17,12 +19,23 @@ public class HandEditor : Editor
 
         if (Application.isPlaying)
         {
-            foreach (var finger in Hand.Fingers) finger?.Bend?.Set(Hand.BendValue);
+            Hand.SetBend(Hand.BendValue);
         }
         else
         {
-            foreach (var finger in Hand.Fingers) finger?.Pose?.Set(Hand.BendValue);
+            if (BendValue != Hand.BendValue)
+            {
+                BendValue = Hand.BendValue;
+                foreach (var finger in Hand.Fingers) finger?.Pose?.Set(Hand.BendValue);
+            }
+
+            if (Radius != Hand.Radius)
+            {
+                Radius = Hand.Radius;
+                Debug.DrawRay(Hand.Palm.position, Hand.Palm.forward * Radius, Color.red, Time.deltaTime);
+            }
         }
+
 
         GUILayout.Space(20);
         if (GUILayout.Button("Save Pose Open", GUILayout.Height(50)))

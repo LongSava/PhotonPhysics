@@ -17,14 +17,6 @@ public class Pose : MonoBehaviour
         }
     }
 
-    public void Reset()
-    {
-        Joints = new Transform[3];
-        Joints[0] = transform;
-        Joints[1] = transform.GetChild(0);
-        Joints[2] = transform.GetChild(0).GetChild(0);
-    }
-
     public void SavePoseOpen()
     {
         PositionOpen = new Vector3[Joints.Length];

@@ -1,50 +1,63 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Bend), typeof(Pose))]
+[RequireComponent(typeof(Pose))]
 public class Finger : MonoBehaviour
 {
     public Tip Tip;
-    public Bend Bend;
     public Pose Pose;
-    public float LastBend = -1;
+    public float BendCollision;
+
+    public void SetPose(float value)
+    {
+        Pose.Set(Mathf.Clamp(value, 0, BendCollision));
+    }
+
+    public void GetBendCollision(Collider collider)
+    {
+        BendCollision = GetBendCollisionInRange(0, 0.1f, collider);
+        BendCollision = GetBendCollisionInRange(BendCollision, 0.01f, collider);
+    }
+
+    public float GetBendCollisionInRange(float value, float offset, Collider collider)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            Pose.Set(value);
+            if (Tip.CollisionWith(collider)) return value - offset;
+            value += offset;
+        }
+
+        return value;
+    }
 
     public void Reset()
     {
-        Tip = GetComponentInChildren<Tip>();
-        Bend = GetComponent<Bend>();
+        var childs = new List<Transform>() { transform };
+        childs = Utils.GetChildDepth(transform, childs);
+
         Pose = GetComponent<Pose>();
+        Pose.Joints = new Transform[childs.Count - 1];
+        Pose.PositionOpen = new Vector3[childs.Count - 1];
+        Pose.PositionClose = new Vector3[childs.Count - 1];
+        Pose.RotationOpen = new Quaternion[childs.Count - 1];
+        Pose.RotationClose = new Quaternion[childs.Count - 1];
 
-        Bend.Reset();
-        Pose.Reset();
-    }
-
-    private void Update()
-    {
-        if (Bend.State == Bend.BendState.Open)
+        for (int i = 0; i < childs.Count; i++)
         {
-            if (LastBend == -1)
+            if (i < childs.Count - 1)
             {
-                Pose.Set(Bend.Current);
+                var joint = childs[i];
+                Pose.Joints[i] = joint;
+                Pose.PositionOpen[i] = Pose.PositionClose[i] = joint.localPosition;
+                Pose.RotationOpen[i] = Pose.RotationClose[i] = joint.localRotation;
             }
-            else if (Bend.Current < LastBend)
+            else
             {
-                LastBend = -1;
+                Tip = Utils.AddComponent<Tip>(childs[i]);
             }
         }
 
-        if (Bend.State == Bend.BendState.Close)
-        {
-            if (LastBend == -1)
-            {
-                if (Tip.IsCollision())
-                {
-                    LastBend = Bend.Current;
-                }
-                else
-                {
-                    Pose.Set(Bend.Current);
-                }
-            }
-        }
+        BendCollision = 1;
     }
 }
