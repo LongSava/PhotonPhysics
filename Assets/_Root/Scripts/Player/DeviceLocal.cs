@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LocalDevice : MonoBehaviour
+public class DeviceLocal : MonoBehaviour
 {
     public Transform Head;
     public Transform LeftHand;

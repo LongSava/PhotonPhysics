@@ -5,8 +5,8 @@ public class Player : NetworkBehaviour
 {
     public Rigidbody Rigidbody;
     public Model Model;
-    public LocalDevice LocalDevice;
-    public RemoteDevice RemoteDevice;
+    public DeviceLocal LocalDevice;
+    public DeviceRemote RemoteDevice;
     public Transform InterpolateTarget;
     public InputActions InputActions;
     [Networked] InputDataNetwork InputData { get; set; }
@@ -22,12 +22,12 @@ public class Player : NetworkBehaviour
 
             Runner.GetComponent<NetworkEvents>().OnInput.AddListener(OnInput);
 
-            LocalDevice = await Runner.InstantiateOrigin<LocalDevice>("LocalDevice", InterpolateTarget);
+            LocalDevice = await Runner.InstantiateOrigin<DeviceLocal>("DeviceLocal", InterpolateTarget);
             Model.Init(LocalDevice.Head, LocalDevice.LeftHand, LocalDevice.RightHand);
         }
         else
         {
-            RemoteDevice = await Runner.InstantiateOrigin<RemoteDevice>("RemoteDevice", InterpolateTarget);
+            RemoteDevice = await Runner.InstantiateOrigin<DeviceRemote>("DeviceRemote", InterpolateTarget);
             Model.Init(RemoteDevice.Head, RemoteDevice.LeftHand, RemoteDevice.RightHand);
         }
     }
