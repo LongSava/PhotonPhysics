@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 4821931704258150177}
   - component: {fileID: -1367317636343442839}
   m_Layer: 0
-  m_Name: LocalDevice
+  m_Name: DeviceLocal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
