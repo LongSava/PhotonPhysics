@@ -19,7 +19,11 @@ public class HandEditor : Editor
 
         if (Application.isPlaying)
         {
-            Hand.SetBend(Hand.BendValue);
+            if (BendValue != Hand.BendValue)
+            {
+                BendValue = Hand.BendValue;
+                Hand.SetBend(Hand.BendValue);
+            }
         }
         else
         {

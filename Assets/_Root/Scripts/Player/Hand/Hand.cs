@@ -18,8 +18,12 @@ public class Hand : MonoBehaviour
 
     public void SetBend(float value)
     {
-        if (Bend.GetState(value) == Bend.BendState.Close) CheckBendCollision();
-        Bend.SetTarget(value);
+        if (value != Bend.Target)
+        {
+            if (Bend.GetState(value) == Bend.BendState.Close) CheckBendCollision();
+            else if (Bend.GetState(value) == Bend.BendState.Open) Colliders[0] = null;
+            Bend.SetTarget(value);
+        }
     }
 
     public void CheckBendCollision()
@@ -30,7 +34,11 @@ public class Hand : MonoBehaviour
 
             if (Colliders[0] != null)
             {
-                foreach (var finger in Fingers) finger.GetBendCollision(Colliders[0]);
+                foreach (var finger in Fingers) finger.SetBendCollision(finger.GetBendCollision(Colliders[0]));
+            }
+            else
+            {
+                foreach (var finger in Fingers) finger.SetBendCollision(1);
             }
         }
     }

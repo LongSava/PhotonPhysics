@@ -39,7 +39,7 @@ public class Bend : MonoBehaviour
 
     public void SetTarget(float target)
     {
-        if (target != Target) Target = Mathf.Clamp01(target);
+        Target = Mathf.Clamp01(target);
     }
 
     public void Reset()

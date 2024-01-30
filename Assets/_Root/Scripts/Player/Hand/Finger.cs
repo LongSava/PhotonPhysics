@@ -13,10 +13,16 @@ public class Finger : MonoBehaviour
         Pose.Set(Mathf.Clamp(value, 0, BendCollision));
     }
 
-    public void GetBendCollision(Collider collider)
+    public void SetBendCollision(float value)
     {
-        BendCollision = GetBendCollisionInRange(0, 0.1f, collider);
-        BendCollision = GetBendCollisionInRange(BendCollision, 0.01f, collider);
+        BendCollision = value;
+    }
+
+    public float GetBendCollision(Collider collider)
+    {
+        var bendCollision = GetBendCollisionInRange(0, 0.1f, collider);
+        bendCollision = GetBendCollisionInRange(bendCollision, 0.01f, collider);
+        return bendCollision;
     }
 
     public float GetBendCollisionInRange(float value, float offset, Collider collider)

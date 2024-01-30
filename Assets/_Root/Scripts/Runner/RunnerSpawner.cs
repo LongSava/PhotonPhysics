@@ -18,8 +18,8 @@ public class RunnerSpawner : MonoBehaviour
 
     private async void OnPlayerJoined(NetworkRunner runner, PlayerRef playerRef)
     {
-        var player = await Utils.GetAsset<Player>("Player");
-        RunnerServer.Spawn(player, inputAuthority: playerRef);
+        var playerInput = await Utils.GetAsset<PlayerInput>("PlayerInput");
+        RunnerServer.Spawn(playerInput, inputAuthority: playerRef);
     }
 
     private void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
