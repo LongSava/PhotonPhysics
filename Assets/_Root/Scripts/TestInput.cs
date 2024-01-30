@@ -17,7 +17,7 @@ public class TestInput : MonoBehaviour
     {
         Player.Model.GripRight(InputActions.Player.GripRight.ReadValue<float>());
         Player.Model.GripLeft(InputActions.Player.GripLeft.ReadValue<float>());
-        Player.Rigidbody.MovePosition(transform.position + transform.forward * InputActions.Player.Move.ReadValue<Vector2>().y * Time.deltaTime);
+        Player.Rigidbody.MovePosition(transform.position + Player.Device.Head.forward * InputActions.Player.Move.ReadValue<Vector2>().y * Time.deltaTime);
         Player.transform.Rotate(new Vector3(0, InputActions.Player.Rotate.ReadValue<Vector2>().x, 0) * Time.deltaTime * 100);
     }
 }
