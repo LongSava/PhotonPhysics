@@ -1282,9 +1282,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliders:
   - {fileID: 0}
-  LayerMask:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!4 &361209392005992510 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -2899422035419094908, guid: e039fa0da73f7aa47a48f430f8ca9ffa,
@@ -1426,9 +1423,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliders:
   - {fileID: 0}
-  LayerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!4 &1476360631396400120 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5097370190579632962, guid: e039fa0da73f7aa47a48f430f8ca9ffa,
@@ -1461,9 +1455,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliders:
   - {fileID: 0}
-  LayerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1 &1612630414793944038 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4278032810995721380, guid: e039fa0da73f7aa47a48f430f8ca9ffa,
@@ -1484,9 +1475,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliders:
   - {fileID: 0}
-  LayerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!4 &1751064977104572390 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5372056943023685468, guid: e039fa0da73f7aa47a48f430f8ca9ffa,
@@ -2012,9 +2000,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliders:
   - {fileID: 0}
-  LayerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1 &4370452586872956235 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1268151995469589007, guid: e039fa0da73f7aa47a48f430f8ca9ffa,
@@ -2349,9 +2334,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliders:
   - {fileID: 0}
-  LayerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!4 &6767057098311269359 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1092408308860062549, guid: e039fa0da73f7aa47a48f430f8ca9ffa,
@@ -2646,9 +2628,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliders:
   - {fileID: 0}
-  LayerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!4 &7003043137080936625 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -5480977901411583989, guid: e039fa0da73f7aa47a48f430f8ca9ffa,
@@ -2701,9 +2680,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliders:
   - {fileID: 0}
-  LayerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1 &7431765103326219145 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3882815353823017779, guid: e039fa0da73f7aa47a48f430f8ca9ffa,
@@ -2764,9 +2740,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliders:
   - {fileID: 0}
-  LayerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1 &7770838073068395915 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4114030615378554161, guid: e039fa0da73f7aa47a48f430f8ca9ffa,
@@ -2835,7 +2808,8 @@ MonoBehaviour:
   Colliders:
   - {fileID: 0}
   BendValue: 0
-  Radius: 0.5
+  Radius: 0.04
+  Grabble: {fileID: 0}
 --- !u!114 &8671344224959080983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3126,7 +3100,8 @@ MonoBehaviour:
   Colliders:
   - {fileID: 0}
   BendValue: 0
-  Radius: 0.5
+  Radius: 0.04
+  Grabble: {fileID: 0}
 --- !u!1 &8685836070310331720 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3047284246813455858, guid: e039fa0da73f7aa47a48f430f8ca9ffa,
@@ -3213,9 +3188,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliders:
   - {fileID: 0}
-  LayerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!4 &9125843744045320608 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -6024149945523619558, guid: e039fa0da73f7aa47a48f430f8ca9ffa,

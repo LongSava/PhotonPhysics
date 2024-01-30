@@ -10,6 +10,7 @@ public class Hand : MonoBehaviour
     public Collider[] Colliders = new Collider[1];
     [Range(0, 1)] public float BendValue;
     public float Radius;
+    public Grabble Grabble;
 
     private void Update()
     {
@@ -20,13 +21,13 @@ public class Hand : MonoBehaviour
     {
         if (value != Bend.Target)
         {
-            if (Bend.GetState(value) == Bend.BendState.Close) CheckBendCollision();
-            else if (Bend.GetState(value) == Bend.BendState.Open) Colliders[0] = null;
+            if (Bend.GetState(value) == Bend.BendState.Close) AddBendCollision();
+            else if (Bend.GetState(value) == Bend.BendState.Open) RemoveBendCollision();
             Bend.SetTarget(value);
         }
     }
 
-    public void CheckBendCollision()
+    public void AddBendCollision()
     {
         if (Colliders[0] == null)
         {
@@ -35,12 +36,35 @@ public class Hand : MonoBehaviour
             if (Colliders[0] != null)
             {
                 foreach (var finger in Fingers) finger.SetBendCollision(finger.GetBendCollision(Colliders[0]));
+                Grab();
             }
             else
             {
                 foreach (var finger in Fingers) finger.SetBendCollision(1);
             }
         }
+    }
+
+    public void RemoveBendCollision()
+    {
+        if (Colliders[0] != null)
+        {
+            Colliders[0] = null;
+            UnGrab();
+        }
+    }
+
+    public void Grab()
+    {
+        if (Colliders[0].TryGetComponent(out Grabble))
+        {
+            Grabble.SetTarget(transform);
+        }
+    }
+
+    public void UnGrab()
+    {
+        Grabble?.RemoveTarget(transform);
     }
 
     public void Reset()
