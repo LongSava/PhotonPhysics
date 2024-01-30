@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2024136905722666374}
+  - component: {fileID: 6711032598007658925}
   - component: {fileID: 2024136905722666106}
   - component: {fileID: 3519008381496393472}
   - component: {fileID: 2016291033092589551}
   - component: {fileID: 3203465264422660805}
-  - component: {fileID: 6711032598007658925}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -37,6 +37,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6711032598007658925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024136905722666107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb9e96cfbc0ff3f4dbc6c8a89ad99882, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  Player: {fileID: 0}
 --- !u!114 &2024136905722666106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,8 +89,8 @@ MonoBehaviour:
     RawGuidValue: 65c0c44931396994a887615db7c878d7
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 3203465264422660805}
   - {fileID: 6711032598007658925}
+  - {fileID: 3203465264422660805}
   SimulationBehaviours: []
 --- !u!54 &2016291033092589551
 Rigidbody:
@@ -122,20 +136,6 @@ MonoBehaviour:
     RotTeleportRadians: 1.5
   UseLegacySharedModeInterpolation: 0
   TargetInterpolationDelay: 0.03
---- !u!114 &6711032598007658925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2024136905722666107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb9e96cfbc0ff3f4dbc6c8a89ad99882, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interpolationDataSource: 0
-  Player: {fileID: 0}
 --- !u!1 &6338847247355476925
 GameObject:
   m_ObjectHideFlags: 0
