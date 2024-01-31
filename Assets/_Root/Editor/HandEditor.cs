@@ -31,7 +31,7 @@ public class HandEditor : Editor
             if (BendValue != Hand.BendValue)
             {
                 BendValue = Hand.BendValue;
-                foreach (var finger in Hand.Fingers) finger?.Pose?.Set(Hand.BendValue);
+                foreach (var finger in Hand.Fingers) finger?.FingerPose?.SetPose(Hand.BendValue);
             }
 
             if (Radius != Hand.Radius)
@@ -55,7 +55,7 @@ public class HandEditor : Editor
         {
             if (EditorUtility.DisplayDialog("Save Pose Open", "Are you sure?", "OK", "Cancel"))
             {
-                foreach (var finger in Hand.Fingers) finger?.Pose.SavePoseOpen();
+                foreach (var finger in Hand.Fingers) finger?.FingerPose.SavePoseOpen();
             }
         }
 
@@ -64,7 +64,7 @@ public class HandEditor : Editor
         {
             if (EditorUtility.DisplayDialog("Save Pose Close", "Are you sure?", "OK", "Cancel"))
             {
-                foreach (var finger in Hand.Fingers) finger?.Pose.SavePoseClose();
+                foreach (var finger in Hand.Fingers) finger?.FingerPose.SavePoseClose();
             }
         }
     }
@@ -115,21 +115,25 @@ public class HandEditor : Editor
         var childs = new List<Transform>() { finger.transform };
         childs = Utils.GetChildDepth(finger.transform, childs);
 
-        finger.Pose = finger.GetComponent<Pose>();
-        finger.Pose.Joints = new Transform[childs.Count - 1];
-        finger.Pose.PositionOpen = new Vector3[childs.Count - 1];
-        finger.Pose.PositionClose = new Vector3[childs.Count - 1];
-        finger.Pose.RotationOpen = new Quaternion[childs.Count - 1];
-        finger.Pose.RotationClose = new Quaternion[childs.Count - 1];
+        finger.FingerPose = finger.GetComponent<FingerPose>();
+        finger.FingerPose.Joints = new Transform[childs.Count - 1];
+
+        if (finger.FingerPose.PoseOpen == null) finger.FingerPose.PoseOpen = finger.FingerPose.gameObject.AddComponent<Pose>();
+        finger.FingerPose.PoseOpen.Position = new Vector3[childs.Count - 1];
+        finger.FingerPose.PoseOpen.Rotation = new Quaternion[childs.Count - 1];
+
+        if (finger.FingerPose.PoseClose == null) finger.FingerPose.PoseClose = finger.FingerPose.gameObject.AddComponent<Pose>();
+        finger.FingerPose.PoseClose.Position = new Vector3[childs.Count - 1];
+        finger.FingerPose.PoseClose.Rotation = new Quaternion[childs.Count - 1];
 
         for (int i = 0; i < childs.Count; i++)
         {
             if (i < childs.Count - 1)
             {
                 var joint = childs[i];
-                finger.Pose.Joints[i] = joint;
-                finger.Pose.PositionOpen[i] = finger.Pose.PositionClose[i] = joint.localPosition;
-                finger.Pose.RotationOpen[i] = finger.Pose.RotationClose[i] = joint.localRotation;
+                finger.FingerPose.Joints[i] = joint;
+                finger.FingerPose.PoseOpen.Position[i] = finger.FingerPose.PoseClose.Position[i] = joint.localPosition;
+                finger.FingerPose.PoseOpen.Rotation[i] = finger.FingerPose.PoseClose.Rotation[i] = joint.localRotation;
             }
             else
             {

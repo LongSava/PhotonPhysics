@@ -1,16 +1,15 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Pose))]
+[RequireComponent(typeof(FingerPose))]
 public class Finger : MonoBehaviour
 {
     public Tip Tip;
-    public Pose Pose;
+    public FingerPose FingerPose;
     public float BendCollision;
 
     public void SetPose(float value)
     {
-        Pose.Set(Mathf.Clamp(value, 0, BendCollision));
+        FingerPose.SetPose(Mathf.Clamp(value, 0, BendCollision));
     }
 
     public void SetBendCollision(float value)
@@ -29,7 +28,7 @@ public class Finger : MonoBehaviour
     {
         for (int i = 0; i < 10; i++)
         {
-            Pose.Set(value);
+            FingerPose.SetPose(value);
             if (Tip.CollisionWith(collider)) return value;
             value += offset;
         }

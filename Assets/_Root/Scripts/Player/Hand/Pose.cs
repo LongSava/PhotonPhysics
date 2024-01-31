@@ -2,43 +2,17 @@ using UnityEngine;
 
 public class Pose : MonoBehaviour
 {
-    public Transform[] Joints;
-    [SerializeField][HideInInspector] public Vector3[] PositionOpen;
-    [SerializeField][HideInInspector] public Quaternion[] RotationOpen;
-    [SerializeField][HideInInspector] public Vector3[] PositionClose;
-    [SerializeField][HideInInspector] public Quaternion[] RotationClose;
+    [SerializeField] public Vector3[] Position;
+    [SerializeField] public Quaternion[] Rotation;
 
-    public void Set(float value)
+    public void SavePose(Transform[] joints)
     {
-        for (int i = 0; i < Joints.Length; i++)
+        Position = new Vector3[joints.Length];
+        Rotation = new Quaternion[joints.Length];
+        for (int i = 0; i < joints.Length; i++)
         {
-            Joints[i].localPosition = Vector3.Lerp(PositionOpen[i], PositionClose[i], value);
-            Joints[i].localRotation = Quaternion.Lerp(RotationOpen[i], RotationClose[i], value);
-        }
-    }
-
-    public void SavePoseOpen()
-    {
-        PositionOpen = new Vector3[Joints.Length];
-        RotationOpen = new Quaternion[Joints.Length];
-
-        SavePose(PositionOpen, RotationOpen);
-    }
-
-    public void SavePoseClose()
-    {
-        PositionClose = new Vector3[Joints.Length];
-        RotationClose = new Quaternion[Joints.Length];
-
-        SavePose(PositionClose, RotationClose);
-    }
-
-    public void SavePose(Vector3[] position, Quaternion[] rotation)
-    {
-        for (int i = 0; i < Joints.Length; i++)
-        {
-            position[i] = Joints[i].localPosition;
-            rotation[i] = Joints[i].localRotation;
+            Position[i] = joints[i].localPosition;
+            Rotation[i] = joints[i].localRotation;
         }
     }
 }
