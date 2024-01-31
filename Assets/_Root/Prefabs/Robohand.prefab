@@ -49,7 +49,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Tip: {fileID: 3638882436546176453}
-  Pose: {fileID: 0}
   FingerPose: {fileID: 6096799783784523793}
   BendCollision: 1
 --- !u!114 &6096799783784523793
@@ -199,7 +198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 345239212568053626}
   m_LocalRotation: {x: -0.0000075772396, y: 0.0000004423782, z: -0.000001301989, w: 1}
-  m_LocalPosition: {x: -0.025029056, y: 0.000004653931, z: 0.0000019991398}
+  m_LocalPosition: {x: -0.0176, y: -0.0017, z: 0.002}
   m_LocalScale: {x: 1, y: 1.0000001, z: 1.0000001}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -220,6 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliders:
   - {fileID: 0}
+  Radius: 0.007
 --- !u!1 &612536237255297640
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,7 +383,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2653697820958865515}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.05, y: 0, z: -0.025}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -414,9 +414,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2705256729785811950}
-  m_LocalRotation: {x: -0.0000034403058, y: -0.000003005378, z: -0.000007307157, w: 1}
-  m_LocalPosition: {x: -0.028351573, y: 0.0000055217743, z: -0.0000018620491}
-  m_LocalScale: {x: 1, y: 0.9999999, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0205, y: -0.0014, z: 0.003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4475738766638639421}
@@ -436,6 +436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliders:
   - {fileID: 0}
+  Radius: 0.007
 --- !u!1 &2723534041805942971
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,7 +463,7 @@ Transform:
   m_GameObject: {fileID: 2723534041805942971}
   m_LocalRotation: {x: -0.0000072037797, y: -0.0000022402965, z: -0.0000032116654,
     w: 1}
-  m_LocalPosition: {x: -0.03151844, y: 0.0000054216384, z: -0.00000020861626}
+  m_LocalPosition: {x: -0.0204, y: -0.001, z: 0.0022}
   m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -483,6 +484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliders:
   - {fileID: 0}
+  Radius: 0.007
 --- !u!1 &2911802918870666583
 GameObject:
   m_ObjectHideFlags: 0
@@ -609,7 +611,7 @@ MonoBehaviour:
   Colliders:
   - {fileID: 0}
   BendValue: 0
-  Radius: 0
+  Radius: 0.03
   Grabble: {fileID: 0}
 --- !u!114 &752645622002955805
 MonoBehaviour:
@@ -653,7 +655,7 @@ Transform:
   m_GameObject: {fileID: 3542473488103577453}
   m_LocalRotation: {x: -0.0000061402106, y: -0.0000049649398, z: 0.0000024675394,
     w: 1}
-  m_LocalPosition: {x: -0.02759052, y: -0.00000072479247, z: -0.0000042533875}
+  m_LocalPosition: {x: -0.019, y: 0.0023, z: 0.0027}
   m_LocalScale: {x: 0.9999999, y: 0.99999994, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -674,6 +676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliders:
   - {fileID: 0}
+  Radius: 0.0085
 --- !u!1 &3641655420173323801
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,7 +726,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Tip: {fileID: 5923135538508946350}
-  Pose: {fileID: 0}
   FingerPose: {fileID: 5652433131885793090}
   BendCollision: 1
 --- !u!114 &5652433131885793090
@@ -1134,7 +1136,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Tip: {fileID: 893642799022155315}
-  Pose: {fileID: 0}
   FingerPose: {fileID: 4455751574860674610}
   BendCollision: 1
 --- !u!114 &4455751574860674610
@@ -1244,7 +1245,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Tip: {fileID: 6305598931323003213}
-  Pose: {fileID: 0}
   FingerPose: {fileID: 8626162624316040673}
   BendCollision: 1
 --- !u!114 &8626162624316040673
@@ -1386,7 +1386,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Tip: {fileID: 511669684548506198}
-  Pose: {fileID: 0}
   FingerPose: {fileID: 5044175969466791615}
   BendCollision: 1
 --- !u!114 &5044175969466791615
@@ -1472,7 +1471,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9025599466947050878}
   m_LocalRotation: {x: -0.000008029863, y: 0.0000010747461, z: -0.0000007860363, w: 1}
-  m_LocalPosition: {x: -0.022631383, y: 0.0000040626524, z: 0.0000023543835}
+  m_LocalPosition: {x: -0.01258, y: -0.00068, z: 0.00049}
   m_LocalScale: {x: 1, y: 0.99999994, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1493,3 +1492,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliders:
   - {fileID: 0}
+  Radius: 0.005

@@ -71,49 +71,51 @@ public class HandEditor : Editor
 
     public void SetupHand()
     {
+        Hand.Radius = 0.03f;
+
         Hand.Bend = Hand.GetComponent<Bend>();
         Hand.Bend.State = Bend.BendState.Idle;
         Hand.Bend.Speed = 10;
 
-        var count = 0;
-        for (int i = 0; i < Hand.transform.childCount; i++)
+        Hand.Palm = Hand.transform.Find("Palm");
+        if (Hand.Palm == null)
         {
-            var child = Hand.transform.GetChild(i);
-            if (child.childCount > 0)
+            Hand.Palm = new GameObject("Palm").transform;
+            Hand.Palm.SetParent(Hand.transform);
+            Hand.Palm.localPosition = Vector3.zero;
+            Hand.Palm.localRotation = Quaternion.identity;
+            Hand.Palm.localScale = Vector3.one;
+        }
+
+        if (Hand.Fingers == null)
+        {
+            var count = 0;
+            for (int i = 0; i < Hand.transform.childCount; i++)
             {
-                count++;
+                var child = Hand.transform.GetChild(i);
+                if (child.childCount > 0 && child.Find("Palm") != null) count++;
             }
-            if (child.name == "Palm")
+
+            Hand.Fingers = new Finger[count];
+            for (int i = 0; i < Hand.transform.childCount; i++)
             {
-                Hand.Palm = child;
+                var child = Hand.transform.GetChild(i);
+                if (child.childCount > 0 && child.Find("Palm") != null)
+                {
+                    var finger = child.TryAddComponent<Finger>();
+                    SetupFinger(finger);
+                    Hand.Fingers[i] = finger;
+                }
             }
         }
 
-        Hand.Fingers = new Finger[count];
-        for (int i = 0; i < Hand.transform.childCount; i++)
-        {
-            var child = Hand.transform.GetChild(i);
-            if (child.childCount > 0)
-            {
-                var finger = Utils.AddComponent<Finger>(child);
-                SetupFinger(finger);
-                Hand.Fingers[i] = finger;
-            }
-        }
-
-        if (Hand.Palm == null) Hand.Palm = new GameObject("Palm").transform;
-        Hand.Palm.SetParent(Hand.transform);
-        Hand.Palm.localPosition = Vector3.zero;
-        Hand.Palm.localRotation = Quaternion.identity;
-        Hand.Palm.localScale = Vector3.one;
-
-        Radius = 0.01f;
+        EditorUtility.SetDirty(Hand);
     }
 
     public void SetupFinger(Finger finger)
     {
         var childs = new List<Transform>() { finger.transform };
-        childs = Utils.GetChildDepth(finger.transform, childs);
+        childs = finger.transform.GetChildDepth(childs);
 
         finger.FingerPose = finger.GetComponent<FingerPose>();
         finger.FingerPose.Joints = new Transform[childs.Count - 1];
@@ -137,7 +139,7 @@ public class HandEditor : Editor
             }
             else
             {
-                finger.Tip = Utils.AddComponent<Tip>(childs[i]);
+                finger.Tip = childs[i].TryAddComponent<Tip>();
             }
         }
 

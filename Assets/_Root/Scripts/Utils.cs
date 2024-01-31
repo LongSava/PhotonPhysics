@@ -43,19 +43,19 @@ public static class Utils
         if (components.Length > 0) foreach (var component in components) component.gameObject.SetActive(enabled);
     }
 
-    public static T AddComponent<T>(Transform transform) where T : MonoBehaviour
+    public static T TryAddComponent<T>(this Transform transform) where T : MonoBehaviour
     {
         var component = transform.GetComponent<T>();
         if (component == null) return transform.gameObject.AddComponent<T>();
         return component;
     }
 
-    public static List<Transform> GetChildDepth(Transform parent, List<Transform> transforms)
+    public static List<Transform> GetChildDepth(this Transform parent, List<Transform> transforms)
     {
         if (parent.childCount > 0)
         {
             transforms.Add(parent.GetChild(0));
-            GetChildDepth(transforms[^1], transforms);
+            transforms[^1].GetChildDepth(transforms);
         }
         return transforms;
     }
