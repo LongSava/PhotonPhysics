@@ -2801,14 +2801,11 @@ MonoBehaviour:
   - {fileID: 2925824082318920952}
   - {fileID: 9067880314584176388}
   Palm: {fileID: 7712142335203731860}
-  LayerMask:
-    serializedVersion: 2
-    m_Bits: 64
   Bend: {fileID: 8671344224959080983}
   Colliders:
   - {fileID: 0}
   BendValue: 0
-  Radius: 0.04
+  Radius: 0.03
   Grabble: {fileID: 0}
 --- !u!114 &8671344224959080983
 MonoBehaviour:
@@ -3093,14 +3090,11 @@ MonoBehaviour:
   - {fileID: 7779626984030570948}
   - {fileID: 8590625379600282423}
   Palm: {fileID: 8801191083846248556}
-  LayerMask:
-    serializedVersion: 2
-    m_Bits: 64
   Bend: {fileID: 4092524281571988755}
   Colliders:
   - {fileID: 0}
   BendValue: 0
-  Radius: 0.04
+  Radius: 0.03
   Grabble: {fileID: 0}
 --- !u!1 &8685836070310331720 stripped
 GameObject:

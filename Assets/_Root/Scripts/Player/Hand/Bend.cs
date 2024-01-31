@@ -41,10 +41,4 @@ public class Bend : MonoBehaviour
     {
         Target = Mathf.Clamp01(target);
     }
-
-    public void Reset()
-    {
-        Speed = 10;
-        State = BendState.Idle;
-    }
 }
