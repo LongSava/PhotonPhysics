@@ -59,4 +59,19 @@ public static class Utils
         }
         return transforms;
     }
+
+    public static Vector3 GetAngularVelocity(this Quaternion rotation, Quaternion targetRotation, float elapsedTime)
+    {
+        (targetRotation * Quaternion.Inverse(rotation)).ToAngleAxis(out float angle, out Vector3 axis);
+
+        if (angle > 180f) angle -= 360f;
+        if (Mathf.Abs(angle) > Mathf.Epsilon)
+        {
+            Vector3 angularVelocity = axis * angle * Mathf.Deg2Rad / elapsedTime;
+
+            if (!float.IsNaN(angularVelocity.x)) return angularVelocity;
+        }
+
+        return Vector3.zero;
+    }
 }

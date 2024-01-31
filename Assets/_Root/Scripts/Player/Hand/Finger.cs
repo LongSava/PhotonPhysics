@@ -20,7 +20,7 @@ public class Finger : MonoBehaviour
 
     public float GetBendCollision(Collider collider)
     {
-        var bendCollision = GetBendCollisionInRange(0, 0.1f, collider);
+        var bendCollision = GetBendCollisionInRange(0, 0.1f, collider) - 0.1f;
         bendCollision = GetBendCollisionInRange(bendCollision, 0.01f, collider);
         return bendCollision;
     }
@@ -30,7 +30,7 @@ public class Finger : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             Pose.Set(value);
-            if (Tip.CollisionWith(collider)) return value - offset;
+            if (Tip.CollisionWith(collider)) return value;
             value += offset;
         }
 
