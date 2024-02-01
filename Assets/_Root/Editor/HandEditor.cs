@@ -26,7 +26,7 @@ public class HandEditor : Editor
         {
             BendValueOld = BendValue;
             if (Application.isPlaying) Hand.SetBend(BendValue);
-            else foreach (var finger in Hand.Fingers) finger?.SetPose(BendValue);
+            else foreach (var finger in Hand.Fingers) finger?.FingerPose?.SetPose(BendValue);
         }
         GUILayout.EndHorizontal();
 
@@ -53,7 +53,7 @@ public class HandEditor : Editor
         {
             if (EditorUtility.DisplayDialog("Save Pose Open", "Are you sure?", "OK", "Cancel"))
             {
-                foreach (var finger in Hand.Fingers) finger?.SavePoseOpen();
+                foreach (var finger in Hand.Fingers) finger?.FingerPose.SavePoseOpen();
             }
         }
 
@@ -62,7 +62,7 @@ public class HandEditor : Editor
         {
             if (EditorUtility.DisplayDialog("Save Pose Close", "Are you sure?", "OK", "Cancel"))
             {
-                foreach (var finger in Hand.Fingers) finger?.SavePoseClose();
+                foreach (var finger in Hand.Fingers) finger?.FingerPose.SavePoseClose();
             }
         }
 
@@ -105,16 +105,17 @@ public class HandEditor : Editor
         var childs = new List<Transform>() { finger.transform };
         childs = finger.transform.GetChildDepth(childs);
 
-        finger.Joints = new Transform[childs.Count];
+        finger.FingerPose = finger.GetComponent<FingerPose>();
+        finger.FingerPose.Joints = new Transform[childs.Count];
 
-        if (finger.PoseOpen == null) finger.PoseOpen = finger.gameObject.AddComponent<Pose>();
+        if (finger.FingerPose.PoseOpen == null) finger.FingerPose.PoseOpen = finger.FingerPose.gameObject.AddComponent<Pose>();
 
-        if (finger.PoseClose == null) finger.PoseClose = finger.gameObject.AddComponent<Pose>();
+        if (finger.FingerPose.PoseClose == null) finger.FingerPose.PoseClose = finger.FingerPose.gameObject.AddComponent<Pose>();
 
         for (int i = 0; i < childs.Count; i++)
         {
             var joint = childs[i];
-            finger.Joints[i] = joint;
+            finger.FingerPose.Joints[i] = joint;
 
             if (i == childs.Count - 1)
             {
@@ -139,18 +140,18 @@ public class HandEditor : Editor
             {
                 finger.BendCollision = 1;
 
-                var length = finger.Joints.Length;
+                var length = finger.FingerPose.Joints.Length;
 
-                finger.PoseOpen.Positions = new Vector3[length];
-                finger.PoseOpen.Rotations = new Quaternion[length];
-                finger.PoseClose.Positions = new Vector3[length];
-                finger.PoseClose.Rotations = new Quaternion[length];
+                finger.FingerPose.PoseOpen.Positions = new Vector3[length];
+                finger.FingerPose.PoseOpen.Rotations = new Quaternion[length];
+                finger.FingerPose.PoseClose.Positions = new Vector3[length];
+                finger.FingerPose.PoseClose.Rotations = new Quaternion[length];
 
                 for (int i = 0; i < length; i++)
                 {
-                    finger.PoseOpen.Positions[i] = finger.PoseClose.Positions[i] = finger.Joints[i].localPosition;
-                    finger.PoseOpen.Rotations[i] = finger.Joints[i].localRotation;
-                    finger.PoseClose.Rotations[i] = Quaternion.Euler(0, -90, 0);
+                    finger.FingerPose.PoseOpen.Positions[i] = finger.FingerPose.PoseClose.Positions[i] = finger.FingerPose.Joints[i].localPosition;
+                    finger.FingerPose.PoseOpen.Rotations[i] = finger.FingerPose.Joints[i].localRotation;
+                    finger.FingerPose.PoseClose.Rotations[i] = Quaternion.Euler(0, -90, 0);
                 }
             }
         }
