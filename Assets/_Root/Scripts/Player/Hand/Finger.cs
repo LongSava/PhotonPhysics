@@ -1,15 +1,31 @@
 using UnityEngine;
 
-[RequireComponent(typeof(FingerPose))]
 public class Finger : MonoBehaviour
 {
     public Tip Tip;
-    public FingerPose FingerPose;
     public float BendCollision;
+    public Transform[] Joints;
+    public Pose PoseOpen;
+    public Pose PoseClose;
 
     public void SetPose(float value)
     {
-        FingerPose.SetPose(Mathf.Clamp(value, 0, BendCollision));
+        value = Mathf.Clamp(value, 0, BendCollision);
+        for (int i = 0; i < Joints.Length; i++)
+        {
+            Joints[i].localPosition = Vector3.Lerp(PoseOpen.Positions[i], PoseClose.Positions[i], value);
+            Joints[i].localRotation = Quaternion.Lerp(PoseOpen.Rotations[i], PoseClose.Rotations[i], value);
+        }
+    }
+
+    public void SavePoseOpen()
+    {
+        PoseOpen.SavePose(Joints);
+    }
+
+    public void SavePoseClose()
+    {
+        PoseClose.SavePose(Joints);
     }
 
     public void SetBendCollision(float value)
@@ -28,7 +44,7 @@ public class Finger : MonoBehaviour
     {
         for (int i = 0; i < 10; i++)
         {
-            FingerPose.SetPose(value);
+            SetPose(value);
             if (Tip.CollisionWith(collider)) return value;
             value += offset;
         }
