@@ -10,8 +10,8 @@ public class FingerPose : MonoBehaviour
     {
         for (int i = 0; i < Joints.Length; i++)
         {
-            Joints[i].localPosition = Vector3.Lerp(PoseOpen.Position[i], PoseClose.Position[i], value);
-            Joints[i].localRotation = Quaternion.Lerp(PoseOpen.Rotation[i], PoseClose.Rotation[i], value);
+            Joints[i].localPosition = Vector3.Lerp(PoseOpen.Positions[i], PoseClose.Positions[i], value);
+            Joints[i].localRotation = Quaternion.Lerp(PoseOpen.Rotations[i], PoseClose.Rotations[i], value);
         }
     }
 

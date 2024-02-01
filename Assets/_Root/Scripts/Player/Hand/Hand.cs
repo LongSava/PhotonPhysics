@@ -4,11 +4,9 @@ using UnityEngine;
 public class Hand : MonoBehaviour
 {
     public Finger[] Fingers;
-    public Transform Palm;
+    public Palm Palm;
     public Bend Bend;
     public Collider[] Colliders = new Collider[1];
-    [Range(0, 1)] public float BendValue;
-    public float Radius;
     public Grabble Grabble;
 
     private void Update()
@@ -30,7 +28,7 @@ public class Hand : MonoBehaviour
     {
         if (Colliders[0] == null)
         {
-            Physics.OverlapSphereNonAlloc(Palm.position, Radius, Colliders, 1 << LayerMask.NameToLayer("Grabble"), QueryTriggerInteraction.Ignore);
+            Physics.OverlapSphereNonAlloc(Palm.transform.position, Palm.Radius, Colliders, 1 << LayerMask.NameToLayer("Grabble"), QueryTriggerInteraction.Ignore);
 
             if (Colliders[0] != null)
             {
